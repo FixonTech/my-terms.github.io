@@ -2,17 +2,44 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <link href="https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome!</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Привет</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            background-color: #282c34;
+            color: #ffcc00;
+            font-family: 'Fjalla One', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 5vw;
+        }
+    </style>
 </head>
 <body>
-    <div class="parallax-container">
-        <div class="content">
-            <h1>Welcome!</h1>
-        </div>
-    </div>
-    <script src="script.js"></script>
+    <div class="content">Двигай меня, наклоняя телефон!</div>
+
+    <script>
+        const content = document.querySelector('.content');
+
+        window.addEventListener('deviceorientation', (event) => {
+            const x = event.beta;
+            const y = event.gamma;
+
+            const moveX = y * 2;
+            const moveY = x * 2;
+
+            content.style.transform = `translate(-50%, -50%) translate(${moveX}px, ${moveY}px)`;
+        });
+    </script>
 </body>
 </html>
